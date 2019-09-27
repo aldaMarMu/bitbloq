@@ -152,6 +152,10 @@ const uploadResolver = {
           "UPLOAD_FORMAT_ERROR"
         );
       }
+        if (getFilesizeInBytes(createReadStream().path) > 5) {
+          // 5megas
+          throw new ApolloError("Upload error, STL file too big.", "UPLOAD_SIZE_ERROR");
+        }
       await new Promise((resolve, reject) => {
         processUpload(
           createReadStream,
@@ -172,33 +176,7 @@ const uploadResolver = {
       return UploadModel.create(uploadNew);
     },
     uploadImageFile: async (root: any, args: any, context: any) => {
-      const {
-        createReadStream,
-        filename,
-        mimetype,
-        encoding
-      } = await args.file;
-      if (!createReadStream || !filename || !mimetype || !encoding) {
-        throw new ApolloError("Upload error, check file type.", "UPLOAD_ERROR");
-      }
-      await new Promise((resolve, reject) => {
-        processUpload(
-          createReadStream,
-          filename,
-          args.user.userID,
-          resolve,
-          reject
-        );
-      });
-      const uploadNew = new UploadModel({
-        document: args.documentID,
-        filename,
-        mimetype,
-        encoding,
-        publicUrl,
-        user: context.user.userID
-      });
-      return UploadModel.create(uploadNew);
+      return await uploadImage(args.file, args.documentID, context.user.userID);
     }
   }
 };

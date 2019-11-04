@@ -179,20 +179,18 @@ const EditDocument: FC<EditDocumentProps> = ({ folder, id, type }) => {
 
   useEffect(() => {
     //setImage(data && data.document && data.document.image);
-    setImage({
-      image:
-        data &&
-        data.document &&
-        data.document.image &&
-        (data.document.image.image
-          ? data.document.image.image
-          : data.document.image),
-      isSnapshot:
-        data &&
-        data.document &&
-        data.document.image &&
-        (data.document.image.image ? data.document.image.isSnapshot : true)
-    });
+    if (data && data.document) {
+      setImage({
+        image:
+          data.document.image &&
+          (data.document.image.image
+            ? data.document.image.image
+            : data.document.image),
+        isSnapshot:
+          data.document.image &&
+          (data.document.image.image ? data.document.image.isSnapshot : true)
+      });
+    }
   }, [data]);
 
   const dataURItoBlob = (dataURI: string): Blob => {

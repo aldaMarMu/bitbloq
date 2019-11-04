@@ -94,20 +94,7 @@ const EditDocument: FC<EditDocumentProps> = ({ folder, id, type }) => {
       setError(null);
     } else if (!loadingDocument && !errorDocument) {
       setDocument(data.document);
-      setImage({
-        image: data
-          ? data.document &&
-            data.document.image &&
-            (data.document.image.image
-              ? data.document.image.image
-              : data.document.image)
-          : "",
-        isSnapshot: data
-          ? data.document &&
-            data.document.image &&
-            (data.document.image.image ? data.document.image.isSnapshot : true)
-          : true
-      });
+      setImage(data.document && data.document.image);
       setLoading(false);
       setError(null);
     } else if (errorDocument) {
@@ -178,19 +165,7 @@ const EditDocument: FC<EditDocumentProps> = ({ folder, id, type }) => {
   );
 
   useEffect(() => {
-    //setImage(data && data.document && data.document.image);
-    if (data && data.document) {
-      setImage({
-        image:
-          data.document.image &&
-          (data.document.image.image
-            ? data.document.image.image
-            : data.document.image),
-        isSnapshot:
-          data.document.image &&
-          (data.document.image.image ? data.document.image.isSnapshot : true)
-      });
-    }
+    setImage(data && data.document && data.document.image);
   }, [data]);
 
   const dataURItoBlob = (dataURI: string): Blob => {

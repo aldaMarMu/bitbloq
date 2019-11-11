@@ -2,7 +2,7 @@ overwrite: true
 schema: "http://localhost:8000/graphql"
 documents: null
 generates:
-  src/generated/graphql.ts:
+  src/generated/graphql.tsx:
     config:
       scalars:
         Date: Date
@@ -12,7 +12,9 @@ generates:
         Upload: File
     plugins:
       - "typescript"
+      - "typescript-operations"
       - "typescript-resolvers"
+      - "typescript-react-apollo"
   ./graphql.schema.json:
     plugins:
       - "introspection"

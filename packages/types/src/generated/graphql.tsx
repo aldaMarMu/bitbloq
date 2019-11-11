@@ -1,4 +1,5 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
+import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
@@ -12,7 +13,6 @@ export type Scalars = {
   EmailAddress: string,
   Date: Date,
   Number: number,
-  JSON: any,
   Upload: File,
 };
 
@@ -141,7 +141,6 @@ export type FolderIn = {
   foldersID?: Maybe<Array<Maybe<Scalars['ObjectID']>>>,
   parent?: Maybe<Scalars['ObjectID']>,
 };
-
 
 export type LoginOut = {
    __typename?: 'loginOut',
@@ -606,7 +605,6 @@ export type User = {
   createdAt?: Maybe<Scalars['Date']>,
   updatedAt?: Maybe<Scalars['Date']>,
   lastLogin?: Maybe<Scalars['Date']>,
-  signUpSurvey?: Maybe<Scalars['JSON']>,
   rootFolder?: Maybe<Scalars['ObjectID']>,
   documents?: Maybe<Array<Maybe<Document>>>,
   folders?: Maybe<Array<Maybe<Folder>>>,
@@ -625,7 +623,6 @@ export type UserIn = {
   province?: Maybe<Scalars['String']>,
   postCode?: Maybe<Scalars['Number']>,
   country?: Maybe<Scalars['String']>,
-  signUpSurvey?: Maybe<Scalars['JSON']>,
 };
 
 export type UserStep1 = {
@@ -633,6 +630,7 @@ export type UserStep1 = {
   id?: Maybe<Scalars['ObjectID']>,
   email?: Maybe<Scalars['EmailAddress']>,
 };
+
 
 
 
@@ -713,7 +711,6 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
   Date: ResolverTypeWrapper<Scalars['Date']>,
   Number: ResolverTypeWrapper<Scalars['Number']>,
-  JSON: ResolverTypeWrapper<Scalars['JSON']>,
   Document: ResolverTypeWrapper<Document>,
   DocImage: ResolverTypeWrapper<DocImage>,
   Exercise: ResolverTypeWrapper<Exercise>,
@@ -750,7 +747,6 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'],
   Date: Scalars['Date'],
   Number: Scalars['Number'],
-  JSON: Scalars['JSON'],
   Document: Document,
   DocImage: DocImage,
   Exercise: Exercise,
@@ -867,10 +863,6 @@ export type FolderResolvers<ContextType = any, ParentType extends ResolversParen
   folders?: Resolver<Maybe<Array<Maybe<ResolversTypes['Folder']>>>, ParentType, ContextType>,
   parentsPath?: Resolver<Maybe<Array<Maybe<ResolversTypes['Folder']>>>, ParentType, ContextType>,
 };
-
-export interface JsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['JSON'], any> {
-  name: 'JSON'
-}
 
 export type LoginOutResolvers<ContextType = any, ParentType extends ResolversParentTypes['loginOut'] = ResolversParentTypes['loginOut']> = {
   token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
@@ -1033,7 +1025,6 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   createdAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>,
   updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>,
   lastLogin?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>,
-  signUpSurvey?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>,
   rootFolder?: Resolver<Maybe<ResolversTypes['ObjectID']>, ParentType, ContextType>,
   documents?: Resolver<Maybe<Array<Maybe<ResolversTypes['Document']>>>, ParentType, ContextType>,
   folders?: Resolver<Maybe<Array<Maybe<ResolversTypes['Folder']>>>, ParentType, ContextType>,
@@ -1054,7 +1045,6 @@ export type Resolvers<ContextType = any> = {
   Exercise?: ExerciseResolvers<ContextType>,
   File?: FileResolvers<ContextType>,
   Folder?: FolderResolvers<ContextType>,
-  JSON?: GraphQLScalarType,
   loginOut?: LoginOutResolvers<ContextType>,
   Mutation?: MutationResolvers<ContextType>,
   Number?: GraphQLScalarType,

@@ -2,7 +2,7 @@
   "name": "@bitbloq/types",
   "version": "0.0.0",
   "description": "Bitbloq types",
-  "main": "src/export.js",
+  "main": "src/export.ts",
   "authors": [
     {
       "name": "David García Paredes",

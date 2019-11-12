@@ -322,7 +322,10 @@ const Documents: FC<{ id?: string }> = ({ id }) => {
         />
       )}
       <AppFooter />
-      <CloudModal isOpen={cloudModalOpen} onClose={() => setCloudModalOpen(false)} />
+      <CloudModal
+        isOpen={cloudModalOpen}
+        onClose={() => setCloudModalOpen(false)}
+      />
     </Container>
   );
 };
@@ -341,7 +344,9 @@ const Container = styled.div`
 `;
 
 const Content = styled(Layout)`
+  display: flex;
   flex: 1;
+  flex-flow: column nowrap;
   width: 100%;
 `;
 

@@ -13,7 +13,7 @@ import { pubsub } from "../server";
 import { uploadDocumentImage } from "./upload";
 import { getParentsPath, orderFunctions } from "../utils";
 
-import {  Types } from "@bitbloq/types";
+// import {  Types } from "@bitbloq/types";
 
 export const DOCUMENT_UPDATED: string = "DOCUMENT_UPDATED";
 
@@ -214,7 +214,7 @@ const documentResolver = {
      * It could be an image uploaded by the user or a snapshot taken by the app.
      * args: imag: Upload and isSnapshot: Boolean
      */
-    setDocumentImage: async (root: any, args: Types.MutationSetDocumentImageArgs, context: any) => {
+    setDocumentImage: async (root: any, args: any, context: any) => {
       const docFound: IDocument = await DocumentModel.findOne({ _id: args.id });
       if (!docFound) {
         return new ApolloError("Document does not exist", "DOCUMENT_NOT_FOUND");

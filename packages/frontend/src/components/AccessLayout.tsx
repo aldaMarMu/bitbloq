@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 import { colors, HorizontalRule } from "@bitbloq/ui";
 import logoBetaImage from "../images/logo-beta.svg";
 
+import {Types} from "@bitbloq/types";
+
 export enum AccessLayoutSize {
   SMALL,
   MEDIUM,

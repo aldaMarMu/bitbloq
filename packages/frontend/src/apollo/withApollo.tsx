@@ -1,24 +1,16 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import Router from "next/router";
 import { NextApiRequest, NextPageContext } from "next";
 import Head from "next/head";
 import { ApolloClient } from "apollo-client";
 import { ApolloProvider, useMutation } from "@apollo/react-hooks";
 import { createClient } from "./client";
-import {
-  ME_QUERY,
-  RENEW_TOKEN_MUTATION,
-  USER_SESSION_EXPIRES_SUBSCRIPTION,
-  RENEW_SESSION_MUTATION
-} from "./queries";
+import { ME_QUERY, USER_SESSION_EXPIRES_SUBSCRIPTION } from "./queries";
 import {
   getToken,
   setToken,
-  renewToken,
-  shouldRenewToken,
   onSessionError,
   onSessionActivity,
-  watchSession,
   logout,
   useSessionEvent
 } from "../lib/session";
@@ -26,9 +18,6 @@ import { UserDataProvider } from "../lib/useUserData";
 import redirect from "../lib/redirect";
 import SessionWarningModal from "../components/SessionWarningModal";
 import ErrorLayout from "../components/ErrorLayout";
-import { Subscription } from "react-apollo";
-import { ISessionExpires } from "../../../api/src/api-types";
-import { DialogModal } from "@bitbloq/ui";
 
 export interface IContext extends NextPageContext {
   apolloClient: ApolloClient<any>;
@@ -40,11 +29,7 @@ interface ISessionWatcherProps {
 }
 
 const SessionWatcher: FC<ISessionWatcherProps> = ({ tempSession, client }) => {
-  const [sessionExpired, setSessionExpired] = useState(false);
-  const [secondsRemaining, setSecondsRemaining] = useState(0);
   const [anotherSession, setAnotherSession] = useState(false);
-
-  const [renewSession] = useMutation(RENEW_SESSION_MUTATION);
 
   useSessionEvent(
     "error",

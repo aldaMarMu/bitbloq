@@ -2,7 +2,7 @@ import axios from "axios";
 import { compare as bcryptCompare } from "bcrypt";
 import { randomBytes } from "crypto";
 import { stringify } from "querystring";
-import { request } from "http";
+import { request } from "https";
 import { RedisClient } from "redis";
 
 interface IUser {

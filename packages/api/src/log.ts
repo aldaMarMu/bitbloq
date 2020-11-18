@@ -101,8 +101,8 @@ export const apolloLogPlugin = {
           );
         }
         if (influx) {
-          const user_id = user ? user.userID : "";
-          const user_email = user ? user.email : "";
+          const user_id = user ? user.userID : "unknown";
+          const user_email = user ? user.email : "unknown";
           const status = errors ? "error" : "success";
 
           try {

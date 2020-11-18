@@ -75,7 +75,7 @@
     "bitbloq"
   ],
   "scripts": {
-    "dev": "node server.js",
+    "dev": "NODE_OPTIONS=--max_old_space_size=8192 node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "test": "echo \"Write tests!\""

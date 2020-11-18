@@ -200,7 +200,7 @@ const userResolver = {
           }
         );
         await sendEmail(user.email, "Bitbloq cuenta creada", "welcome", {
-          url: `${process.env.FRONTEND_URL}`
+          url: `${process.env.FRONTEND_URL}/signup/activate?token=${logOrSignToken}`
         });
       }
 
@@ -255,7 +255,7 @@ const userResolver = {
         { new: true }
       );
       await sendEmail(user.email, "Bitbloq cuenta creada", "welcome", {
-        url: `${process.env.FRONTEND_URL}`
+        url: `${process.env.FRONTEND_URL}/signup/activate?token=${logOrSignToken}`
       });
       return true;
     },
